@@ -5,11 +5,11 @@ import './App.css';
 
 class App extends Component {
 
-  handleSet = e => {
+ /*  handleSet = e => {
     const { set } = this.props
     const { valor } = this.state
     set(Number(valor))
-  }
+  } */
 
   handleChange = e => {
     const { name, value } = e.target
@@ -25,8 +25,8 @@ class App extends Component {
         <p> {valor} </p>
         <button onClick={increment}>Increment</button>
         <button onClick={decrement}>Decrement</button>
-        <input name='valor' onChange={this.handleChange}></input>
-        <button onClick={this.handleSet()}>Set</button>
+        {/* <input name='valor' onChange={this.handleChange}></input>
+        {/* <button onClick={this.handleSet()}>Set</button> */}
       </div>
     )
   }
