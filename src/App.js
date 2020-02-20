@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { increment, decrement, set } from './reducers';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  handleSet = e => {
+    const { set } = this.props
+    const { valor } = this.state
+    set(Number(valor))
+  }
+
+  handleChange = e => {
+    const { name, value } = e.target
+    this.setState({ [name]: value })
+  }
+
   render() {
-    console.log(this.props)
+    const { increment, decrement, valor } = this.props
+    // problem: se renderiza el boton que llama a la funcion handleSet al cargar el componente
+    // por eso revienta, porque intenta acceder a una propiedad del estado que, al cargar, no existe
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-        </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-        </a>
-        </header>
+        <p> {valor} </p>
+        <button onClick={increment}>Increment</button>
+        <button onClick={decrement}>Decrement</button>
+        <input name='valor' onChange={this.handleChange}></input>
+        <button onClick={this.handleSet()}>Set</button>
       </div>
     )
   }
@@ -31,9 +35,8 @@ class App extends Component {
 // mapStateToProps va a darle al componente App lo único que necesite para funcionar
 // es decir, no le vamos a pasar todas las propiedades
 const mapStateToProps = state => {
-  console.log({state})
   return {
-    value: state,
+    valor: state,
   }
 }
 
