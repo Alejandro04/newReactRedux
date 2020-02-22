@@ -1,32 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { increment, decrement, set } from './reducers';
+//import { increment, decrement, set } from './reducers';
+import UserForm from './components/UserForm';
 import './App.css';
 
 class App extends Component {
 
- /*  handleSet = e => {
-    const { set } = this.props
-    const { valor } = this.state
-    set(Number(valor))
-  } */
+  // Todos los redux form tienen una propiedad onSubmit
+  // Siempre se le va pasar el payload completo
+  // No se necesita escribir la forma de prevenir el comportamiento, por defecto lo hacer ReduxForm
 
-  handleChange = e => {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
+  handleSubmit = payload => {
+    console.log(payload)
   }
 
-  render() {
-    const { increment, decrement, valor } = this.props
-    // problem: se renderiza el boton que llama a la funcion handleSet al cargar el componente
-    // por eso revienta, porque intenta acceder a una propiedad del estado que, al cargar, no existe
+  render() {    
     return (
       <div className="App">
-        <p> {valor} </p>
-        <button onClick={increment}>Increment</button>
-        <button onClick={decrement}>Decrement</button>
-        {/* <input name='valor' onChange={this.handleChange}></input>
-        {/* <button onClick={this.handleSet()}>Set</button> */}
+        <UserForm onSubmit={this.handleSubmit} />
       </div>
     )
   }
@@ -45,9 +36,9 @@ const mapStateToProps = state => {
 
 // proceso: dispatch va ejecutar los reducers, el reducer va retornar el nuevo estado.
 const mapDispatchToProps = dispatch => ({
-  increment: () => dispatch(increment()),
+/*   increment: () => dispatch(increment()),
   decrement: () => dispatch(decrement()),
-  set: payload => dispatch(set(payload))
+  set: payload => dispatch(set(payload)) */
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
