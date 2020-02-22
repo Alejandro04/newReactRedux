@@ -36,7 +36,7 @@ class App extends Component {
 // es decir, no le vamos a pasar todas las propiedades
 const mapStateToProps = state => {
   return {
-    valor: state,
+    valor: state.counter,
   }
 }
 
